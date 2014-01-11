@@ -2,9 +2,9 @@
  * Definitions for date strings for use with the Time library
  *
  * No memory is consumed in the sketch if your code does not call any of the string methods
- * You can change the text of the strings, make sure the short strings are each exactly 3 characters 
+ * You can change the text of the strings, make sure the short strings are each exactly 3 characters
  * the long strings can be any length up to the constant dt_MAX_STRING_LEN defined in Time.h
- * 
+ *
  */
 
 #if defined(__AVR__)
@@ -19,7 +19,7 @@
 #endif
 #include <string.h> // for strcpy_P or strcpy
 #include "Time.h"
- 
+
 // the short strings for each day or month must be exactly dt_SHORT_STR_LEN
 #define dt_SHORT_STR_LEN  3 // the length of short strings
 
@@ -38,7 +38,7 @@ const char monthStr10[] PROGMEM = "October";
 const char monthStr11[] PROGMEM = "November";
 const char monthStr12[] PROGMEM = "December";
 
-PGM_P monthNames_P[] PROGMEM = 
+PGM_P const monthNames_P[] PROGMEM =
 {
     "",monthStr1,monthStr2,monthStr3,monthStr4,monthStr5,monthStr6,
 	monthStr7,monthStr8,monthStr9,monthStr10,monthStr11,monthStr12
@@ -55,8 +55,8 @@ const char dayStr5[] PROGMEM = "Thursday";
 const char dayStr6[] PROGMEM = "Friday";
 const char dayStr7[] PROGMEM = "Saturday";
 
-PGM_P dayNames_P[] PROGMEM = { dayStr0,dayStr1,dayStr2,dayStr3,dayStr4,dayStr5,dayStr6,dayStr7};
-char dayShortNames_P[] PROGMEM = "ErrSunMonTueWedThrFriSat";
+PGM_P const dayNames_P[] PROGMEM = { dayStr0,dayStr1,dayStr2,dayStr3,dayStr4,dayStr5,dayStr6,dayStr7};
+const char dayShortNames_P[] PROGMEM = "ErrSunMonTueWedThrFriSat";
 
 /* functions to return date strings */
 
@@ -68,23 +68,23 @@ char* monthStr(uint8_t month)
 
 char* monthShortStr(uint8_t month)
 {
-   for (int i=0; i < dt_SHORT_STR_LEN; i++)      
-      buffer[i] = pgm_read_byte(&(monthShortNames_P[i+ (month*dt_SHORT_STR_LEN)]));  
+   for (int i=0; i < dt_SHORT_STR_LEN; i++)
+      buffer[i] = pgm_read_byte(&(monthShortNames_P[i+ (month*dt_SHORT_STR_LEN)]));
    buffer[dt_SHORT_STR_LEN] = 0;
    return buffer;
 }
 
-char* dayStr(uint8_t day) 
+char* dayStr(uint8_t day)
 {
    strcpy_P(buffer, (PGM_P)pgm_read_word(&(dayNames_P[day])));
    return buffer;
 }
 
-char* dayShortStr(uint8_t day) 
+char* dayShortStr(uint8_t day)
 {
    uint8_t index = day*dt_SHORT_STR_LEN;
-   for (int i=0; i < dt_SHORT_STR_LEN; i++)      
-      buffer[i] = pgm_read_byte(&(dayShortNames_P[index + i]));  
-   buffer[dt_SHORT_STR_LEN] = 0; 
+   for (int i=0; i < dt_SHORT_STR_LEN; i++)
+      buffer[i] = pgm_read_byte(&(dayShortNames_P[index + i]));
+   buffer[dt_SHORT_STR_LEN] = 0;
    return buffer;
 }
