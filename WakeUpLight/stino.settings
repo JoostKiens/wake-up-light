@@ -1,0 +1,10 @@
+{
+    "arduino_folder": "/usr/share/arduino", 
+    "baudrate": 4, 
+    "board": 0, 
+    "build_folder": "/home/joost/Arduino_Build", 
+    "full_compilation": false, 
+    "platform": 1, 
+    "platform_name": "Arduino AVR Boards", 
+    "serial_port": 0
+}
